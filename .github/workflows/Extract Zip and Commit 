@@ -1,0 +1,5 @@
+name: Extract ZIP and commit on: push: branches: [ site-render ] workflow_dispatch:
+
+permissions: contents: write
+
+jobs: extract: runs-on: ubuntu-latest steps: - name: Checkout uses: actions/checkout@v4 with: token: ${{ secrets.GITHUB_TOKEN }} - name: List files run: ls -la - name: Ensure unzip installed run: sudo apt-get update && sudo apt-get install -y unzip - name: Extract zip run: | if [ -f "COBB_ChatGPT_Style.zip" ]; then unzip -o COBB_ChatGPT_Style.zip -d public else echo "Zip not found" && exit 1 fi - name: Commit public folder run: | git config user.name "github-actions[bot]" git config user.email "41898282+github-actions[bot]@users.noreply.github.com" git add public || true if git diff --staged --quiet; then echo "No changes to commit" else git commit -m "Extract COBB_ChatGPT_Style.zip into public/" || true git push origin HEAD:site-render fi
