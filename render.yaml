@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: cobb-server
+    env: node
+    repo: https://github.com/varunpreetham23/COBB
+    branch: site-render
+    buildCommand: npm install
+    startCommand: npm start
+    instanceType: free
