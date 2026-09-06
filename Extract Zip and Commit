@@ -1,4 +1,4 @@
-name: Extract ZIP and commit on: push: branches: [ site-render ] workflow_dispatch:
+ on: push: branches: [ site-render ] workflow_dispatch:
 
 permissions: contents: write
 
